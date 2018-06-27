@@ -1,0 +1,75 @@
+---
+title: "Column decorations"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Column decorations}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+options(tibble.print_min = 4L, tibble.print_max = 4L)
+library(tibble)
+library(dplyr)
+set.seed(1014)
+```
+
+If the default data output in a tibble doesn't work for you, the `decor_()` family of functions allows overriding it on a column-by-column basis.
+
+In the first example, the default number of significant figures is insufficient to show the difference between the numbers:
+
+```{r sigfig}
+tibble(a = 2:6 + 1:5 * 1e-6)
+```
+
+Override the display by using `decor_num()` to indicate the number of significant digits to use for this column. 
+
+```{r decor-num}
+decorated_num <- tibble(
+  a = decor_num(2:6 + 1:5 * 1e-6, 7),
+  b = 1:5
+)
+
+decorated_num
+```
+
+The decoration survives base R subsetting, arithmetic operations, and most *dplyr* single-table verbs and joins:
+
+```{r decor-num-robust}
+head(decorated_num, 2)
+decorated_num[2:3, ]
+
+decorated_num %>%
+  filter(a < 4) %>% 
+  arrange(-a) %>% 
+  left_join(tibble(b = 2:4, c = letters[2:4])) %>% 
+  select(-b) %>%
+  mutate(aa = a + 1 * 2)
+```
+
+So far, decorations have been defined only for numbers and characters, here you can specify the minimum of characters to be shown if the strings need truncation.
+Compare the following outputs:
+
+```{r space}
+id <- "1234567890123456789012345678901234567890"
+
+tibble(
+  id = id,
+  an_astonishingly_wide_column_name_to_show_truncation = 1,
+  yet_another_extemely_wide_column = 2,
+  give_me_more_of_these = 3
+)
+
+tibble(
+  id = decor_chr(id, 40),
+  an_astonishingly_wide_column_name_to_show_truncation = 1,
+  yet_another_extemely_wide_column = 2,
+  give_me_more_of_these = 3
+)
+```
+
+Column decorations offer a flexible and extensible way of defining how a column should be printed.
+Expect more decorations to be added to tibble and contributed from other packages!
+
+TODO: Describe how to implement your own decoration class.

@@ -18,7 +18,7 @@ Imports:
     cli,
     crayon,
     methods,
-    pillar (>= 1.2.1.9001),
+    pillar (>= 1.2.3),
     rlang (>= 0.2.0),
     utils
 Suggests: 
@@ -45,6 +45,7 @@ Collate:
     'check-names.R'
     'compat-lazyeval.R'
     'compat-purrr.R'
+    'decor.R'
     'enframe.R'
     'exports.R'
     'glimpse.R'
