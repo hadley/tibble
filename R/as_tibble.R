@@ -215,6 +215,7 @@ as_tibble.matrix <- function(x, ..., validate = NULL, .name_repair = NULL) {
     }
     validate <- NULL
   }
+
   colnames(m) <- names
   as_tibble(m, ..., validate = validate, .name_repair = .name_repair)
 }

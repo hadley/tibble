@@ -142,7 +142,13 @@ test_that("add_row() fails nicely for grouped data frames (#179)", {
 test_that("can add new column", {
   df_all_new <- add_column(df_all, j = 1:3, k = 3:1)
   expect_identical(nrow(df_all_new), nrow(df_all))
-  expect_identical(df_all_new[seq_along(df_all)], df_all)
+
+  # Since the switch to vctrs the `tzone` attribute is set in
+  # `df_all_new`. Test with `equal` instead of `identical`. Also
+  # `dplyr:::all.equal.tbl_df()` somehow fails with a type error
+  # (dplyr 0.8.3), so we bypass the method.
+  expect_true(all.equal.default(df_all_new[seq_along(df_all)], df_all))
+
   expect_identical(df_all_new$j, 1:3)
   expect_identical(df_all_new$k, 3:1)
 })

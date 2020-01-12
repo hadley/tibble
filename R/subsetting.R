@@ -415,7 +415,16 @@ tbl_subassign <- function(x, i, j, value) {
     }
   }
 
-  vec_restore(xo, x)
+  df_cast(xo, x)
+}
+df_cast <- function(x, to, new_vars = character()) {
+  common_vars <- setdiff(names(to), new_vars)
+  common_vars <- intersect(names(x), common_vars)
+
+  to_common <- to[common_vars]
+  to_ptype <- vec_ptype_common(x, to_common)
+
+  vec_cast(x, to = to_ptype)
 }
 
 vec_as_new_row_index <- function(i, x) {

@@ -487,3 +487,17 @@ test_that("$<- recycles only values of length one", {
     error_inconsistent_cols(3, "a", 0, "Existing data")
   )
 })
+
+test_that("[[<- restores class", {
+  # Requires r-lib/vctrs#690
+  skip("r-lib/vctrs#690")
+
+  df <- dplyr::group_by(mtcars, cyl)
+  df[[1]] <- mtcars$cyl
+  expect_is(df, "grouped_df")
+
+  df <- dplyr::group_by(mtcars, cyl)
+  df[[2]] <- mtcars$vs
+  expect_is(df, "grouped_df")
+  expect_identical(dplyr::group_data(df)$cyl, c(0, 1))
+})
