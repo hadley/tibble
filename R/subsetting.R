@@ -568,6 +568,13 @@ tbl_subassign_row <- function(x, i, value) {
   set_tibble_class(x, nrow)
 }
 
+# Dedicated function for faster subsetting
+set_tibble_class <- function(x, nrow) {
+  attr(x, "row.names") <- .set_row_names(nrow)
+  class(x) <- tibble_class
+  x
+}
+
 check_scalar <- function(j) {
   if (!has_length(j, 1)) {
     abort(error_need_scalar_column_index())

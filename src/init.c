@@ -7,7 +7,6 @@
 static const R_CallMethodDef CallEntries[] = {
   {"tibble_matrixToDataFrame", (DL_FUNC) &tibble_matrixToDataFrame, 1},
   {"tibble_string_to_indices", (DL_FUNC) &tibble_string_to_indices, 1},
-  {"tibble_update_attrs", (DL_FUNC) &tibble_update_attrs, 2},
   {"tibble_restore_impl", (DL_FUNC) &tibble_restore_impl, 2},
 
   {NULL, NULL, 0}
