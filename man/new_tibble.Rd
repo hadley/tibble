@@ -35,7 +35,8 @@ runs without raising an error.
 \section{Construction}{
 
 
-For \code{new_tibble()}, \code{x} must be a list.
+For \code{new_tibble()}, \code{x} must be a list. The only attributes of \code{x} that
+are retained are the names.
 The \code{...} argument allows adding more attributes to the subclass.
 An \code{nrow} argument is required.
 This should be an integer of length 1,

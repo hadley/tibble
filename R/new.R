@@ -37,10 +37,9 @@ new_tibble <- function(x, ..., nrow, class = NULL, subclass = NULL) {
 
   #' @section Construction:
   #'
-  #' For `new_tibble()`, `x` must be a list.
-  x <- unclass(x)
-
-  if (!is.list(x)) {
+  #' For `new_tibble()`, `x` must be a list. The only attributes of `x` that
+  #' are retained are the names.
+  if (!is_list(x)) {
     cnd_signal(error_new_tibble_must_be_list())
   }
 

@@ -93,14 +93,14 @@ test_that("names in list columns are preserved", {
   expect_equal(names(foo$x), c("y", "z"))
 })
 
-test_that("attributes are preserved", {
+test_that("unknown attributes are not preserved", {
   df <- structure(
     data.frame(x = 1:10, g1 = rep(1:2, each = 5), g2 = rep(1:5, 2)),
-    meta = "this is important"
+    meta = "this is extra"
   )
   res <- as_tibble(df)
 
-  expect_identical(attr(res, "meta"), attr(df, "meta"))
+  expect_identical(attr(res, "meta"), NULL)
 })
 
 test_that("tibble aliases", {
