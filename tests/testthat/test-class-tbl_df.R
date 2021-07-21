@@ -48,6 +48,22 @@ test_that("names<-()", {
   )
 })
 
+test_that("rbind()", {
+  skip_if_not(getRversion() >= "4.0.0")
+  expect_equal(rbind(tibble(a = 1)), tibble(a = 1))
+  expect_equal(rbind(tibble(a = 1), data.frame(a = 2)), tibble(a = 1:2))
+  expect_equal(rbind(tibble(a = 1), data.frame(b = 2)), tibble(a = c(1, NA), b = c(NA, 2)))
+  expect_equal(rbind(data.frame(a = 1), tibble(a = 2)), data.frame(a = 1:2))
+})
+
+test_that("cbind()", {
+  skip_if_not(getRversion() >= "4.0.0")
+  expect_equal(cbind(tibble(a = 1)), tibble(a = 1))
+  expect_equal(cbind(tibble(a = 1), data.frame(b = 2)), tibble(a = 1, b = 2))
+  expect_equal(cbind(tibble(a = 1), data.frame(b = 2:3)), tibble(a = c(1, 1), b = 2:3))
+  expect_equal(cbind(data.frame(a = 1), tibble(b = 2)), data.frame(a = 1, b = 2))
+})
+
 test_that("output test", {
   skip_if_not_installed("testthat", "3.0.0.9000")
   skip_if_not_installed("lifecycle", "0.2.0.9000")

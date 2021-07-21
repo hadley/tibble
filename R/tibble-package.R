@@ -6,6 +6,7 @@
 #' @import ellipsis
 #' @importFrom vctrs vec_as_location vec_as_location2 vec_as_names vec_as_names_legacy vec_c
 #' @importFrom vctrs vec_is vec_rbind vec_recycle vec_size vec_slice vec_assign
+#' @importFrom vctrs vec_cbind
 #' @importFrom vctrs unspecified vec_as_subscript2 num_as_location vec_ptype_abbr
 #' @importFrom vctrs vec_names2 vec_set_names
 #' @aliases NULL tibble-package

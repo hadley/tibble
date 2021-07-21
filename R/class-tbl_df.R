@@ -135,6 +135,19 @@ cnd_names_non_na <- function(name) {
   }
 }
 
+#' @rawNamespace if (getRversion() >= "4.0.0") S3method(rbind, tbl_df)
+if (getRversion() >= "4.0.0") rbind.tbl_df <- function(...) {
+  # deparse.level is part of the interface of the generic but not passed along
+  # for data frame methods
+
+  vec_rbind(...)
+}
+
+#' @rawNamespace if (getRversion() >= "4.0.0") S3method(cbind, tbl_df)
+if (getRversion() >= "4.0.0") cbind.tbl_df <- function(...) {
+  vec_cbind(...)
+}
+
 # Errors ------------------------------------------------------------------
 
 error_names_must_be_non_null <- function() {
