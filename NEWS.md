@@ -7,31 +7,24 @@
 
 # tibble 3.1.3
 
-- Same as previous version.
+## Bug fixes
 
-
-# tibble 3.1.2.9002
-
-- Establish compatibility with rlang > 0.4.11 (#908).
-- `as_tibble_row()` supports arbitrary vectors (#797).
 - `tbl[row, col] <- rhs` treats an all-`NA` logical vector as a missing value both for existing data (#773) and for the right-hand side value (#868). This means that a column initialized with `NA` (of type `logical`) will change its type when a row is updated to a value of a different type. 
-
-
-# tibble 3.1.2.9001
-
-- Use `pillar::dim_desc()` (#859).
 - `[[<-()` supports symbols (#893).
+
+## Features
+
+- `as_tibble_row()` supports arbitrary vectors (#797).
 - `enframe()` and `deframe()` support arbitrary vectors (#730).
 - `tibble()` and `tibble_row()` ignore all columns that evaluate to `NULL`, not only those where a verbatim `NULL` is passed (#895, #900).
 - `new_tibble()` is now faster (#901, @mgirlich).
+
+## Internal
+
+- Establish compatibility with rlang > 0.4.11 (#908).
+- Use `pillar::dim_desc()` (#859).
 - Establish compatibility with testthat > 3.0.3 (#896, @lionel-).
-
-
-# tibble 3.1.2.9000
-
 - Bump required versions of ellipsis and vctrs to avoid warning during package load.
-
-- `new_tibble()` is now faster (#901, @mgirlich).
 
 
 # tibble 3.1.2
